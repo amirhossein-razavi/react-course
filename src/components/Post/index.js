@@ -1,16 +1,45 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
-const defaultPost = {
-  id: '',
-  title: 'No post selected',
-  body: '',
-};
+const Post = ({ post, onChange, onSave, onCancel }) => {
+  if (!post) {
+    return <div />;
+  }
 
-const Post = ({ post = defaultPost }) => (
-  <div>
-    <h2>{`${post.id} - ${post.title}`}</h2>
-    <p>{post.body}</p>
-  </div>
-);
+  return (
+    <div>
+      <p>
+        <label>Title:</label>
+        <input
+          type="text"
+          value={post.title || ''}
+          onChange={(e) => onChange('title', e.target.value)}
+        />
+      </p>
+      <p>
+        <label>Body:</label>
+        <textarea
+          rows="3"
+          value={post.body || ''}
+          onChange={(e) => onChange('body', e.target.value)}
+        />
+      </p>
+      <p>
+        <button
+          type="button"
+          onClick={() => onSave(post)}
+        >
+          {'Save'}
+        </button>
+        <button
+          type="button"
+          onClick={() => onCancel()}
+        >
+          {'Cancel'}
+        </button>
+      </p>
+    </div>
+  );
+};
 
 export default Post;
