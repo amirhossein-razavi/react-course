@@ -25,5 +25,7 @@ module.exports = {
     "react/prop-types": 0,
     "jsx-a11y/control-has-associated-label": 0,
     "react/jsx-curly-brace-presence": 0,
+    "react/sort-comp": 0,
+    "react/jsx-props-no-spreading": 0,
   },
 };

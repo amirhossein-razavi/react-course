@@ -1,17 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 
-const Post = ({
-  post, onChange, onSave, onCancel, mode,
+const AddPost = ({
+  mode, onChange, onSaveA, onCancel,
 }) => {
-  if (mode === 'Edit') {
+  if (mode === 'AddPost') {
     return (
       <div>
         <p>
           <label>Title:</label>
           <input
             type="text"
-            value={post.title || ''}
             onChange={(e) => onChange('title', e.target.value)}
           />
         </p>
@@ -19,14 +18,13 @@ const Post = ({
           <label>Body:</label>
           <textarea
             rows="3"
-            value={post.body || ''}
             onChange={(e) => onChange('body', e.target.value)}
           />
         </p>
         <p>
           <button
             type="button"
-            onClick={() => onSave(post)}
+            onClick={() => onSaveA()}
           >
             {'Save'}
           </button>
@@ -41,9 +39,10 @@ const Post = ({
     );
   }
 
+
   return (
     <div />
   );
 };
 
-export default Post;
+export default AddPost;
