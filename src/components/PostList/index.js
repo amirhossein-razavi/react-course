@@ -8,13 +8,13 @@ const PostList = (props) => {
     <div>
       <h2>This is Post List</h2>
       <div>
-        <table>
+        <table className="table table-striped">
           <thead>
             <tr>
               <th>#</th>
               <th>Id</th>
               <th>title</th>
-              <th />
+              <th aria-label="options" />
             </tr>
           </thead>
           <tbody>

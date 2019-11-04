@@ -28,7 +28,6 @@ class App extends React.Component {
     this.onDelete = this.onDelete.bind(this);
     this.onEdit = this.onEdit.bind(this);
     this.addPost = this.addPost.bind(this);
-    this.onSaveA = this.onSaveA.bind(this);
   }
 
   onSelectPost(post) {
@@ -39,29 +38,45 @@ class App extends React.Component {
   }
 
   onSave(post) {
-    this.setState((state) => ({
-      posts: state.posts.map((p) => (
-        p.id === post.id
-          ? { ...post }
-          : p
-      )),
-      selectedPost: {},
-      mode: '',
-    }), () => {
-      const { posts } = this.state;
+    const { posts, selectedPost } = this.state;
 
-      postRepo.savePosts(posts);
-    });
+    if (selectedPost.userId === 11) {
+      posts.push(selectedPost);
+
+      this.setState(() => ({
+        mode: '',
+        selectedPost: {},
+      }), () => {
+        postRepo.savePosts(posts);
+      });
+    } else {
+      this.setState(() => ({
+        posts: posts.map((p) => (
+          p.id === post.id
+            ? { ...post }
+            : p
+        )),
+        selectedPost: {},
+        mode: '',
+      }), () => {
+        postRepo.savePosts(posts);
+      });
+    }
   }
 
   onDelete(post) {
-    this.setState((state) => ({
-      ...state,
-      posts: state.posts.filter((p) => post.id !== p.id),
-    }), () => {
-      const { posts } = this.state;
-      postRepo.savePosts(posts);
-    });
+    // eslint-disable-next-line no-restricted-globals
+    const onConfirm = confirm('are you sure');
+
+    if (onConfirm) {
+      this.setState((state) => ({
+        ...state,
+        posts: state.posts.filter((p) => post.id !== p.id),
+      }), () => {
+        const { posts } = this.state;
+        postRepo.savePosts(posts);
+      });
+    }
   }
 
   onChange(prop, value) {
@@ -75,7 +90,7 @@ class App extends React.Component {
 
   onCancel() {
     this.setState({
-      selectedPost: undefined,
+      selectedPost: {},
       mode: '',
     });
   }
@@ -102,18 +117,18 @@ class App extends React.Component {
     });
   }
 
-  onSaveA() {
-    const { posts, selectedPost } = this.state;
+  // onSaveA() {
+  //   const { posts, selectedPost } = this.state;
 
-    posts.push(selectedPost);
+  //   posts.push(selectedPost);
 
-    this.setState(() => ({
-      mode: '',
-      selectedPost: {},
-    }), () => {
-      postRepo.savePosts(posts);
-    });
-  }
+  //   this.setState(() => ({
+  //     mode: '',
+  //     selectedPost: {},
+  //   }), () => {
+  //     postRepo.savePosts(posts);
+  //   });
+  // }
 
 
   render() {
@@ -130,12 +145,14 @@ class App extends React.Component {
           </h1>
           <button
             type="button"
+            className="btn btn-success"
             onClick={() => this.addPost()}
           >
             Add Post
           </button>
         </div>
         <hr />
+
         <div style={styles.postList}>
           <PostList
             posts={posts}
@@ -143,22 +160,33 @@ class App extends React.Component {
             selectedPost={selectedPost}
             onEdit={this.onEdit}
             onDelete={this.onDelete}
+            mode={mode}
           />
         </div>
-        <Post
-          post={selectedPost}
-          onCancel={this.onCancel}
-          onChange={this.onChange}
-          onSave={this.onSave}
-          mode={mode}
-        />
-        <ShowPost post={selectedPost} mode={mode} />
-        <AddPost
-          mode={mode}
-          onChange={this.onChange}
-          onSaveA={this.onSaveA}
-          onCancel={this.onCancel}
-        />
+
+        <div style={styles.showPost}>
+          <Post
+            post={selectedPost}
+            onCancel={this.onCancel}
+            onChange={this.onChange}
+            onSave={this.onSave}
+            mode={mode}
+          />
+        </div>
+
+        <div style={styles.showPost}>
+          <ShowPost post={selectedPost} mode={mode} />
+        </div>
+
+        <div style={styles.showPost}>
+          <AddPost
+            mode={mode}
+            onChange={this.onChange}
+            onSave={this.onSave}
+            onCancel={this.onCancel}
+          />
+        </div>
+
       </div>
     );
   }

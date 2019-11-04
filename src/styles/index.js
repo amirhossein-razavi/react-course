@@ -1,6 +1,17 @@
 export default {
   postList: {
-    maxHeight: 400,
-    overflow: 'auto',
+    maxHeight: 350,
+    overflowY: 'auto',
+    overflowX: 'hidden',
   },
+
+  container: {
+    maxWidth: 500,
+    float: 'left',
+  },
+
+  showPost: {
+    marginTop: 50,
+  },
+
 };

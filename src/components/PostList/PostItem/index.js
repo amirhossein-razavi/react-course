@@ -10,10 +10,11 @@ const styles = {
 
 const PostItem = (props) => {
   const {
-    post, index, onSelect, onEdit, onDelete, selectedPost = {},
+    post, index, onSelect, onEdit, onDelete, selectedPost, mode = {},
   } = props;
 
-  const isSelected = selectedPost.id === post.id;
+  const isSelected = (selectedPost.id === post.id) && mode === 'selectedPost';
+  const Editing = (selectedPost.id === post.id) && mode === 'Edit';
 
   return (
     <tr style={isSelected ? styles.selectedPost : {}}>
@@ -23,6 +24,7 @@ const PostItem = (props) => {
       <td>
         <button
           type="button"
+          className="btn btn-secondary"
           onClick={() => onSelect(post)}
           disabled={isSelected}
         >
@@ -32,14 +34,16 @@ const PostItem = (props) => {
       <td>
         <button
           type="button"
+          className="btn btn-primary"
           onClick={() => onEdit(post)}
         >
-          {isSelected ? 'Editing' : 'Edit'}
+          {Editing ? 'Editing' : 'Edit'}
         </button>
       </td>
       <td>
         <button
           type="button"
+          className="btn btn-danger"
           onClick={() => onDelete(post)}
         >
           Delete
