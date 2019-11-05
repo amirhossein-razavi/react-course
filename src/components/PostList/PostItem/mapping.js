@@ -1,5 +1,5 @@
 export default (store, originalProps) => ({
-  selectedPost: store.getState().selectedPost || {},
+  selectedPost: store.getState().selectedPost,
   mode: store.getState().mode || '',
   index: originalProps.index,
   post: originalProps.post,
