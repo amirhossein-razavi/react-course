@@ -4,9 +4,9 @@ import styles from '../../styles';
 
 
 const AddPost = ({
-  mode, onChange, onSave, onCancel,
+  post, mode, onChange, onSave, onCancel,
 }) => {
-  if (mode === 'AddPost') {
+  if (post && mode === 'AddPost') {
     return (
       <form className="container" style={styles.container}>
         <div className="form-group">
@@ -18,6 +18,7 @@ const AddPost = ({
               type="text"
               className="form-control"
               placeholder="Title"
+              value={post.title}
               onChange={(e) => onChange('title', e.target.value)}
             />
           </div>
@@ -32,6 +33,7 @@ const AddPost = ({
               className="form-control"
               placeholder="Body"
               rows="3"
+              value={post.body}
               onChange={(e) => onChange('body', e.target.value)}
             />
           </div>
@@ -42,7 +44,7 @@ const AddPost = ({
             <button
               type="button"
               className="btn btn-success"
-              onClick={() => onSave()}
+              onClick={() => onSave(post)}
             >
               {'Save'}
             </button>
