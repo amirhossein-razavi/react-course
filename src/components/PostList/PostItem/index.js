@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'cato-react-store';
+
+import mapping from './mapping';
 
 const styles = {
   selectedPost: {
@@ -8,11 +11,7 @@ const styles = {
   },
 };
 
-const PostItem = (props) => {
-  const {
-    post, index, onSelect, onEdit, onDelete, selectedPost, mode = {},
-  } = props;
-
+const PostItem = ({ post, index, onSelect, onEdit, onDelete, selectedPost, mode }) => {
   const isSelected = (selectedPost.id === post.id) && mode === 'selectedPost';
   const Editing = (selectedPost.id === post.id) && mode === 'Edit';
 
@@ -53,4 +52,4 @@ const PostItem = (props) => {
   );
 };
 
-export default PostItem;
+export default connect(mapping)(PostItem);

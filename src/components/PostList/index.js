@@ -1,6 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { connect } from 'cato-react-store';
+
 import PostItem from './PostItem';
+import mapping from './mapping';
 
 const PostList = (props) => {
   const { posts } = props;
@@ -33,4 +36,4 @@ const PostList = (props) => {
   );
 };
 
-export default PostList;
+export default connect(mapping)(PostList);
