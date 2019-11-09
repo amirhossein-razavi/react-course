@@ -11,7 +11,7 @@ const styles = {
   },
 };
 
-const PostItem = ({ post, index, onSelect, onEdit, onDelete, selectedPost, mode }) => {
+const PostItem = ({ post, index, onSelect, onEdit, onDelete, selectedPost = {}, mode }) => {
   const isSelected = (selectedPost.id === post.id) && mode === 'selectedPost';
   const Editing = (selectedPost.id === post.id) && mode === 'Edit';
 

@@ -1,17 +1,15 @@
 import React from 'react';
+import { connect } from 'cato-react-store';
 
-const defaultPost = {
-  id: '',
-  title: '',
-  body: '',
-};
+import mapping from './mapping';
 
-const Post = ({ post = defaultPost, mode }) => {
+const Post = ({ selectedPost = {}, mode }) => {
+  console.log(selectedPost);
   if (mode === 'selectedPost' || mode === 'Edit') {
     return (
       <div>
-        <h2>{`${post.id} - ${post.title}`}</h2>
-        <p>{post.body}</p>
+        <h2>{`${selectedPost.id} - ${selectedPost.title}`}</h2>
+        <p>{selectedPost.body}</p>
       </div>
     );
   }
@@ -21,4 +19,4 @@ const Post = ({ post = defaultPost, mode }) => {
   );
 };
 
-export default Post;
+export default connect(mapping)(Post);

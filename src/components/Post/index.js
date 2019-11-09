@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import {connect} from 'cato-react-store';
 import styles from '../../styles';
 
+import mapping from './mapping';
+
 const Post = ({
-  post, onChange, onSave, onCancel, mode,
+  selectedPost, onChange, onSave, onCancel, mode,
 }) => {
   if (mode === 'Edit') {
     return (
@@ -17,7 +20,7 @@ const Post = ({
               type="text"
               className="form-control"
               placeholder="Title"
-              value={post.title || ''}
+              value={selectedPost.title || ''}
               onChange={(e) => onChange('title', e.target.value)}
             />
           </div>
@@ -32,7 +35,7 @@ const Post = ({
               className="form-control"
               placeholder="Body"
               rows="3"
-              value={post.body || ''}
+              value={selectedPost.body || ''}
               onChange={(e) => onChange('body', e.target.value)}
             />
           </div>
@@ -43,7 +46,7 @@ const Post = ({
             <button
               type="button"
               className="btn btn-success"
-              onClick={() => onSave(post)}
+              onClick={() => onSave(selectedPost)}
             >
               {'Save'}
             </button>
@@ -66,4 +69,4 @@ const Post = ({
   );
 };
 
-export default Post;
+export default connect(mapping)(Post);

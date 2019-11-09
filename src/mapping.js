@@ -4,11 +4,13 @@ const { postRepo } = repository;
 
 export default (store) => ({
   posts: store.getState().posts,
+
   initializePosts: () => {
     store.setState({
       posts: postRepo.loadPosts(),
     });
   },
+
   addPost: () => {
     const { posts } = store.getState();
     const postsLen = Number(posts.length);
@@ -23,4 +25,5 @@ export default (store) => ({
       mode: 'AddPost',
     });
   },
+  
 });
