@@ -4,10 +4,10 @@ import { connect } from 'cato-react-store';
 import mapping from './mapping';
 import styles from './styles';
 
-import Post from './components/Post';
-import ShowPost from './components/ShowPost';
+// import Post from './components/Post';
+// import ShowPost from './components/ShowPost';
 import PostList from './components/PostList';
-import AddPost from './components/AddPost';
+// import AddPost from './components/AddPost';
 
 class App extends React.PureComponent {
   componentDidMount() {
